@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>PROCESS ACTIVE</title>
+<style>
+body {
+  background: black;
+  color: #00ff88;
+  font-family: monospace;
+  padding: 20px;
+  overflow: hidden;
+}
+
+#terminal {
+  white-space: pre-wrap;
+  font-size: 16px;
+}
+
+.flicker {
+  animation: flicker 0.12s infinite;
+}
+
+@keyframes flicker {
+  0% { opacity: 1; }
+  50% { opacity: 0.3; }
+  100% { opacity: 1; }
+}
+
+#countdown {
+  color: red;
+  font-size: 22px;
+  margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="terminal"></div>
+<div id="countdown" class="flicker"></div>
+
+<script>
+const text = `
+> booting sequence...
+> memory access: granted
+> device detected
+
+You should not be here.
+
+This page was never indexed.
+This page does not exist.
+
+If you are reading this,
+the connection already knows you.
+
+Do not refresh.
+Do not exit.
+Watching stabilizes the signal.
+
+They lied when they said it was gone.
+
+`;
+
+let i = 0;
+function typeText() {
+  if (i < text.length) {
+    document.getElementById("terminal").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeText, 40);
+  }
+}
+typeText();
+
+let timeLeft = 13;
+const countdown = document.getElementById("countdown");
+
+const timer = setInterval(() => {
+  countdown.innerText = "CONNECTION COLLAPSE IN: " + timeLeft;
+  timeLeft--;
+  if (timeLeft < 0) {
+    clearInterval(timer);
+    countdown.innerText = "TOO LATE.";
+    document.body.style.background = "#050000";
+  }
+}, 1000);
+</script>
+
+</body>
+</html>
